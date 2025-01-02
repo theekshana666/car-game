@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Car Gaming</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: #000000;
+            color: white;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            padding: 3rem;
+            background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.7));
+            border-bottom: 2px solid #333;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .title {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px rgba(255,0,0,0.5);
+        }
+
+        .users-count {
+            color: #ff3333;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-shadow: 0 0 10px rgba(255,0,0,0.3);
+        }
+
+        .games-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            padding: 2.5rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .game-card {
+            background: #111111;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            border: 1px solid #222;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(255,0,0,0.2);
+        }
+
+        .game-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .game-card:hover .game-image {
+            transform: scale(1.05);
+        }
+
+        .game-content {
+            padding: 1.5rem;
+            background: linear-gradient(rgba(0,0,0,0.8), #111111);
+        }
+
+        .game-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .play-button {
+            background: linear-gradient(45deg, #ff0000, #ff3333);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .play-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255,0,0,0.4);
+        }
+
+        .star {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: #ffd700;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            animation: pulse 2s infinite;
+            z-index: 10;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 class="title">Ultimate Car Gaming</h1>
+        <div class="users-count" id="userCount">165899 users online</div>
+    </div>
+
+    <div class="games-container">
+        <div class="game-card">
+            <div class="star"></div>
+            <img src="/api/placeholder/400/320" alt="BMW Racing Circuit" class="game-image">
+            <div class="game-content">
+                <h2 class="game-title">Circuit Masters</h2>
+                <button class="play-button">Play Now</button>
+            </div>
+        </div>
+        <div class="game-card">
+            <img src="/api/placeholder/400/320" alt="Classic Porsche" class="game-image">
+            <div class="game-content">
+                <h2 class="game-title">Classic Legends</h2>
+                <button class="play-button">Play Now</button>
+            </div>
+        </div>
+        <div class="game-card">
+            <img src="/api/placeholder/400/320" alt="Night City Racing" class="game-image">
+            <div class="game-content">
+                <h2 class="game-title">Urban Nights</h2>
+                <button class="play-button">Play Now</button>
+            </div>
+        </div>
+        <div class="game-card">
+            <img src="/api/placeholder/400/320" alt="Performance Racing" class="game-image">
+            <div class="game-content">
+                <h2 class="game-title">Track Elite</h2>
+                <button class="play-button">Play Now</button>
+            </div>
+        </div>
+        <div class="game-card">
+            <img src="/api/placeholder/400/320" alt="Ford GT Racing" class="game-image">
+            <div class="game-content">
+                <h2 class="game-title">GT Legends</h2>
+                <button class="play-button">Play Now</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateUserCount() {
+            const count = Math.floor(Math.random() * (170000 - 160000) + 160000);
+            document.getElementById('userCount').textContent = count + ' users online';
+        }
+        
+        setInterval(updateUserCount, 5000);
+
+        document.querySelectorAll('.play-button').forEach(button => {
+            button.addEventListener('click', () => {
+                alert('Loading game...');
+            });
+        });
+    </script>
+</body>
+</html>
